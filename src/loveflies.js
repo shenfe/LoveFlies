@@ -5,24 +5,50 @@
  * @Last modified time: 2017-07-05T02:37:31+08:00
  */
 
-/**
- * @Refer: http://www.zhangxinxu.com/wordpress/2014/08/so-powerful-svg-smil-animation/
- */
 
 var creator = function ($container, option) {
     option = option || {};
-    var svgHtml = `
-<svg width="200" height="400" xmlns="http://www.w3.org/2000/svg">
-  <text font-size="40" x="0" y="0" fill="#cd0000">❤
-    <animateMotion path="M10,80 q100,120 120,20 q140,-50 160,0" rotate="auto" begin="0s" dur="2s" repeatCount="1"/>
-    <animate attributeName="opacity" from="1" to="0" begin="0s" dur="2s" repeatCount="1" />
-    <animateTransform attributeName="transform" begin="0s" dur="2s" type="scale" from="1" to="2" repeatCount="1"/>
-  </text>
-</svg>
-`;
-    var $temp = document.createElement('div');
+    option.limit = option.limit || 10;
+    if ($container.querySelectorAll('.loveflies').length >= option.limit) return;
+    option.width = option.width || $container.clientWidth;
+    option.height = option.height || $container.clientHeight;
+    option.duration = option.duration || 1;
+    option.scaleFrom = option.scaleFrom || 0.5;
+    option.scaleTo = option.scaleTo || 1.5;
+    var mx = option.width / 2,
+        my = option.height;
+    var qx1 = option.width/6 + Math.ceil(option.width/2 * Math.random()),
+        qy1 = Math.ceil(option.height/2 * Math.random()) + option.height/2,
+        qx2 = qx1 + Math.ceil(option.width/4 * Math.random()) * (Math.random() > 0.5 ? 1 : -1),
+        qy2 = Math.ceil(option.height/2 * Math.random());
+    option.path = option.path ||
+        'M' + mx + ',' + my + ' Q' + qx1 + ',' + qy1 + ' ' + qx2 + ',' + qy2;
+    option.type = option.type || 'text'; // 'text'|'image'
+    option.content = option.content || '❤';  // text content  or image url
+    option.color = option.color || '#cd0000';
+
+    var style = '';
+
+    var svgHtml = '\
+<svg class="loveflies" style="position: absolute; bottom: 0; left: 50%; transform: translate(-50%, 0); pointer-events: none;" \
+    width="' + option.width + '" height="' + option.height + '" xmlns="http://www.w3.org/2000/svg">'
+    + (option.type === 'text' ?
+        ('<text ' + style + ' x="0" y="0" fill="' + option.color + '">' + option.content) :
+        '<image ' + style + ' x="0" y="0" width="100px" height="100px" xlink:href="' + option.content + '">') + '\
+        <animateMotion path="' + option.path + '"' + (option.type === 'image' ? ' rotate="auto"' : '') + ' begin="0s" dur="' + option.duration + 's" repeatCount="1"/>\
+        <animate attributeName="opacity" from="1" to="0" begin="0s" dur="' + option.duration + 's" repeatCount="1" />\
+        <animateTransform attributeName="transform" begin="0s" dur="' + option.duration + 's" type="scale" \
+            from="' + option.scaleFrom + '" to="' + option.scaleTo + '" repeatCount="1"/>\
+    </' + option.type + '>' +
+'</svg>';
+
+    var $temp = window.document.createElement('div');
     $temp.innerHTML = svgHtml;
-    $container.appendChild($temp.children[0]);
+    var $svg = $temp.children[0];
+    $container.appendChild($svg);
+    window.setTimeout(function () {
+        $container.removeChild($svg);
+    }, option.duration * 1000);
 };
 
 if (typeof exports !== 'undefined') {
