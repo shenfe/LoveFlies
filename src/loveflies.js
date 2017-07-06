@@ -7,6 +7,8 @@
 
 
 var creator = function ($container, option) {
+    option.offsetX = option.offsetX || 0;
+    option.offsetY = option.offsetY || 0;
     option = option || {};
     option.limit = option.limit || 10;
     if ($container.querySelectorAll('.loveflies').length >= option.limit) return;
@@ -15,12 +17,12 @@ var creator = function ($container, option) {
     option.duration = option.duration || 1;
     option.scaleFrom = option.scaleFrom || 0.5;
     option.scaleTo = option.scaleTo || 1.5;
-    var mx = option.width / 2,
-        my = option.height;
-    var qx1 = option.width/6 + Math.ceil(option.width/2 * Math.random()),
-        qy1 = Math.ceil(option.height/2 * Math.random()) + option.height/2,
-        qx2 = qx1 + Math.ceil(option.width/4 * Math.random()) * (Math.random() > 0.5 ? 1 : -1),
-        qy2 = Math.ceil(option.height/2 * Math.random());
+    var mx = option.width / 2 + option.offsetX,
+        my = option.height + option.offsetY;
+    var qx1 = option.width/6 + Math.ceil(option.width/2 * Math.random()) + option.offsetX,
+        qy1 = Math.ceil(option.height/2 * Math.random()) + option.height/2 + option.offsetY,
+        qx2 = qx1 + Math.ceil(option.width/4 * Math.random()) * (Math.random() > 0.5 ? 1 : -1) + option.offsetX,
+        qy2 = Math.ceil(option.height/2 * Math.random()) + option.offsetY;
     option.path = option.path ||
         'M' + mx + ',' + my + ' Q' + qx1 + ',' + qy1 + ' ' + qx2 + ',' + qy2;
     option.type = option.type || 'text'; // 'text'|'image'
