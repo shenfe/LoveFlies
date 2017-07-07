@@ -37,16 +37,23 @@
         <script type="text/javascript">
             window.onload = function () {
                 const $ = sel => document.querySelector(sel);
+                let count= 0;
                 $('.trigger').addEventListener('click', function (e) {
                     console.log('love');
-                    window.setInterval(function () {
-                        loveflies($('.container'), {
-                            // type: 'image',
-                            // content: 'https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2015/10/1444835774tux.jpg',
-                            limit: 200,
-                            scaleTo: 4
-                        });
-                    }, 200);
+                    option = {
+                        // type: 'image',
+                        // content: 'https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2015/10/1444835774tux.jpg',
+                        limit: 200,
+                        scaleTo: 4
+                    };
+                    if (count >= 3) {
+                        window.setInterval(function () {
+                            loveflies($('.container'), Object.assign({}, option));
+                        }, 200);
+                    } else {
+                        count++;
+                        loveflies($('.container'), Object.assign({}, option));
+                    }
                 }, false);
             };
         </script>
