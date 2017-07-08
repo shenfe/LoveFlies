@@ -7,6 +7,10 @@ Loving-heart-flying animation.
 ## Usage
  
 ```js
-var loveFlyCreator = require(…);
-loveFlyCreator($container, {});
+var loveFlyCreator = require('path/to/loveflies.js');
+loveFlyCreator($container, {
+    type: 'text',
+    scaleFrom: 0.2,
+    scaleTo: 1
+});
 ```
