@@ -5,7 +5,6 @@ Loving-heart-flying animation.
 ![demo](https://raw.githubusercontent.com/shenfe/LoveFlies/master/readme_assets/demo.png)
  
 ## Usage
- 
 ```js
 var loveFlyCreator = require('path/to/loveflies.js');
 $trigger.addEventListener(
