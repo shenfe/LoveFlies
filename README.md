@@ -8,9 +8,14 @@ Loving-heart-flying animation.
  
 ```js
 var loveFlyCreator = require('path/to/loveflies.js');
-loveFlyCreator($container, {
-    type: 'text',
-    scaleFrom: 0.2,
-    scaleTo: 1
-});
+$trigger.addEventListener(
+    'click',
+    function (e) {
+        loveFlyCreator($container, {
+            type: 'text',
+            scaleFrom: 0.2,
+            scaleTo: 1
+        });
+    },
+    false);
 ```
