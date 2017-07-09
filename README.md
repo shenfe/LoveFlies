@@ -2,7 +2,7 @@
 Loving-heart-flying animation.
 
 ## Demo
-[Demo](http://hengwu.me/repos/LoveFlies/demo.html)
+[Demo](http://shenfe.github.io/repos/LoveFlies/demo.html)
  
 ## Usage
 ```js
