@@ -1,12 +1,4 @@
-/**
- * @Author: godzilla
- * @Date:   2017-07-05T01:52:56+08:00
- * @Last modified by:   godzilla
- * @Last modified time: 2017-07-05T02:37:31+08:00
- */
-
-
-var creator = function ($container, option) {
+var rand_941258099 = function ($container, option) {
     option.offsetX = option.offsetX || 0;
     option.offsetY = option.offsetY || 0;
     option = option || {};
@@ -55,8 +47,8 @@ var creator = function ($container, option) {
 
 if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
-        exports = module.exports = creator;
+        exports = module.exports = rand_941258099;
     }
 } else {
-    window.loveflies = creator;
+    window.loveflies = rand_941258099;
 }
